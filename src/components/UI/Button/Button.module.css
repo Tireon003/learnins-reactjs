@@ -1,0 +1,18 @@
+button {
+    color:aliceblue;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    padding: 5px 20px;
+    background: rgb(70, 174, 218);
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+}
+
+button:hover {
+    background: rgb(46, 113, 142);
+}
+
+button:active {
+    background: rgb(27, 66, 83);
+}
