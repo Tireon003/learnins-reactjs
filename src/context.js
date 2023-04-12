@@ -1,3 +1,3 @@
-import {createCotext} from 'react';
+import {createContext} from 'react';
 
-export const InputQuery = createCotext();
+export const InputQuery = createContext();
