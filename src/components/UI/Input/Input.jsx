@@ -8,8 +8,6 @@ const Input = ({placeHolder}) => {
 
     const [query, setQuery] = useContext(InputQuery);
 
-
-    //Поиск можно адекватно реализовать только при помощи Context или Redux
     const getQuery = (e) => {
         setQuery(e.target.value);
     };
