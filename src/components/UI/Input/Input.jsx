@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
+import { InputQuery } from '../../../context';
 
 import './Input.module.css';
 
 
 const Input = ({placeHolder, handleInputQuery}) => {
 
-    const [query, setQuery] = useState('');
+    const [query, setQuery] = useContext(InputQuery);
 
+
+    //Поиск можно адекватно реализовать только при помощи Context или Redux
     const getQuery = (e) => {
         setQuery(e.target.value);
-        // handleInputQuery(e.target.value);
     };
 
     return (

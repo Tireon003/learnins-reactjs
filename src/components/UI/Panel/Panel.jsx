@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import cl from './Panel.module.css';
 
@@ -6,7 +6,7 @@ import Button from '../Button/Button';
 import Input from '../Input/Input';
 
 
-const Panel = ({handleQueryFromPanel}) => {
+const Panel = () => {
 
     // const [handledQuery, setHandledQuery] = useState('')
 

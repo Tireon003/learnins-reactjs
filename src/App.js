@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {InputQuery} from './context.js';
 
 import './App.css';
 
@@ -17,15 +18,15 @@ function App() {
     {key: 6, title: 'Шестой пост', content: "Не прошло и ста лет, как на сайте появился шестой пост."}
   ]);
 
-  const handleInputFromPanel = () => {
-    
-  }
+  const [query, setQuery] = useState('');
 
   return (
-    <div className="App">
-      <Panel posts={posts}/>
-      <PostList posts={posts}/>
-    </div>
+    <InputQuery.Provider value={[query, setQuery]}>
+      <div className="App">
+        <Panel posts={posts}/>
+        <PostList posts={posts}/>
+      </div>
+    </InputQuery.Provider>
   );
 }
 
