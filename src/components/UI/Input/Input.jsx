@@ -4,7 +4,7 @@ import { InputQuery } from '../../../context';
 import './Input.module.css';
 
 
-const Input = ({placeHolder, handleInputQuery}) => {
+const Input = ({placeHolder}) => {
 
     const [query, setQuery] = useContext(InputQuery);
 
