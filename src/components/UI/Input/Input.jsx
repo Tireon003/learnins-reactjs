@@ -1,14 +1,15 @@
-import React, { useContext } from 'react';
-import { InputQuery } from '../../../context';
+import React, { useContext, useState } from 'react';
 
 import './Input.module.css';
 
 
-const Input = ({placeHolder}) => {
+const Input = ({placeHolder, setQuery}) => {
 
-    const [query, setQuery] = useContext(InputQuery);
+    const [currentText, setCurrentText] = useState('');
 
     const getQuery = (e) => {
+        
+        setCurrentText(e.target.value);
         setQuery(e.target.value);
     };
 
@@ -16,7 +17,7 @@ const Input = ({placeHolder}) => {
         <input
             type="text"
             placeholder={placeHolder}
-            value={query}
+            value={currentText}
             onChange={getQuery}
         />
     );

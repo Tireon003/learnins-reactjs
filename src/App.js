@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import {InputQuery} from './context.js';
+import { InputQuery, NewPostData } from './context.js';
 
 import './App.css';
 
 import PostList from './components/UI/PostList/PostList';
 import Panel from './components/UI/Panel/Panel';
-
+import Modal from './components/UI/Modal/Modal.jsx';
+import Input from './components/UI/Input/Input.jsx';
+import Button from './components/UI/Button/Button.jsx';
+import CreatePostForm from './components/UI/CreatePostForm/CreatePostForm.jsx';
 
 function App() {
 
@@ -18,14 +21,29 @@ function App() {
     {key: 6, title: 'Шестой пост', content: "Не прошло и ста лет, как на сайте появился шестой пост."}
   ]);
 
+  //to keep query from search in context InputQuery
   const [query, setQuery] = useState('');
+
+  const [showModal, setShowModal] = useState(false);
+
+  const [newPostData, setNewPostData] = useState({key: Date.now(), title: '', content: ''})
+
+  const createPost = () => {
+    setPosts([newPostData, ...posts]);
+    setShowModal(false);
+  }
 
   return (
     <InputQuery.Provider value={[query, setQuery]}>
-      <div className="App">
-        <Panel posts={posts}/>
-        <PostList posts={posts}/>
-      </div>
+      <NewPostData.Provider value={[newPostData, setNewPostData]}>
+          <div className="App">
+            <Modal visible={showModal} setVisible={setShowModal}>
+              <CreatePostForm createPost={createPost}/>
+            </Modal>
+            <Panel posts={posts} setVisible={setShowModal}/>
+            <PostList posts={posts}/>
+          </div>
+      </NewPostData.Provider>
     </InputQuery.Provider>
   );
 }
