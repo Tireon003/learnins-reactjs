@@ -10,6 +10,10 @@ const Modal = ({children, visible, setVisible}) => {
 
     const [newPostData, setNewPostData] = useContext(NewPostData);
 
+    const clearInput = () => {
+        if(!visible) setCurrentText('')
+    }
+
     const parseTitle = (currentText) => {
         setNewPostData({...newPostData, title: currentText})
       }

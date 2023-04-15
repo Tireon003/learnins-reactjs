@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-import { InputQuery, NewPostData } from './context.js';
+import { InputQuery, NewPostData, ClearInput } from './context.js';
 
 import './App.css';
 
 import PostList from './components/UI/PostList/PostList';
 import Panel from './components/UI/Panel/Panel';
 import Modal from './components/UI/Modal/Modal.jsx';
-import Input from './components/UI/Input/Input.jsx';
-import Button from './components/UI/Button/Button.jsx';
 import CreatePostForm from './components/UI/CreatePostForm/CreatePostForm.jsx';
 
 function App() {
@@ -26,20 +24,27 @@ function App() {
 
   const [showModal, setShowModal] = useState(false);
 
-  const [newPostData, setNewPostData] = useState({key: Date.now(), title: '', content: ''})
+  const [newPostData, setNewPostData] = useState({key: Date.now(), title: '', content: ''});
+
+  const [clearInput, setClearInput] = useState(false);
 
   const createPost = () => {
-    setPosts([newPostData, ...posts]);
-    setShowModal(false);
+    if(newPostData.title && newPostData.content) {
+      setPosts([newPostData, ...posts]);
+
+      setShowModal(false); 
+    }
   }
 
   return (
     <InputQuery.Provider value={[query, setQuery]}>
       <NewPostData.Provider value={[newPostData, setNewPostData]}>
           <div className="App">
-            <Modal visible={showModal} setVisible={setShowModal}>
-              <CreatePostForm createPost={createPost}/>
-            </Modal>
+            <ClearInput.Provider value={[clearInput, setClearInput]}>
+              <Modal visible={showModal} setVisible={setShowModal}>
+                <CreatePostForm createPost={createPost}/>
+              </Modal>
+            </ClearInput.Provider>
             <Panel posts={posts} setVisible={setShowModal}/>
             <PostList posts={posts}/>
           </div>
