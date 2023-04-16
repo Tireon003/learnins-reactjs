@@ -1,39 +1,30 @@
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
 
 import cl from './Modal.module.css';
-import { ModalInputTitle, NewPostData } from '../../../context';
+import { ClearInput } from '../../../context';
 
 const Modal = ({children, visible, setVisible}) => {
 
     const rootClasses = [cl.modal]
     if(visible) rootClasses.push(cl.active)
 
-    const [newPostData, setNewPostData] = useContext(NewPostData);
-
-    const clearInput = () => {
-        if(!visible) setCurrentText('')
-    }
-
-    const parseTitle = (currentText) => {
-        setNewPostData({...newPostData, title: currentText})
-      }
-    
-      const parseContent = (currentText) => {
-        setNewPostData({...newPostData, content: currentText})
-      }
-
     return (
-        <div
-            className={rootClasses.join(' ')}
-            onClick={() => setVisible(false)}
-        >
+        
             <div
-                className={cl.modalContent}
-                onClick={(e) => e.stopPropagation()}
+                className={rootClasses.join(' ')}
+                onClick={() => {
+                    setVisible(false);
+                }}
             >
-                {children}
+                <div
+                    className={cl.modalContent}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                    }}
+                >
+                    {children}
+                </div>
             </div>
-        </div>
     );
 }
 

@@ -1,13 +1,14 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 
 import Input from '../Input/Input';
 import Button from '../Button/Button';
-import { ClearInput, NewPostData } from '../../../context';
+import { NewPostData } from '../../../context';
 
 const CreatePostForm = ({createPost}) => {
 
   const [newPostData, setNewPostData] = useContext(NewPostData);
 
+  
   const getNewTitle = (searchQuery) => {
     setNewPostData({
       ...newPostData,
@@ -18,9 +19,10 @@ const CreatePostForm = ({createPost}) => {
   const getNewContent = (searchQuery) => {
     setNewPostData({
       ...newPostData,
-      content: searchQuery
+      body: searchQuery
     });
   }
+
 
     return (
       

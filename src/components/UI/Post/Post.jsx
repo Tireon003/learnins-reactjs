@@ -9,7 +9,7 @@ const Post = ({post}) => {
         <div className={cl.post_form}>
             <div className={cl.post_content}>
                 <h1>{post.title}</h1>
-                <p>{post.content}</p>
+                <p>{post.body}</p>
             </div>
       </div>
     );

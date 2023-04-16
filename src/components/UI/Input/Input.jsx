@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 import './Input.module.css';
 
 
-const Input = ({placeHolder, setQuery, clearInput}) => {
+const Input = ({placeHolder, setQuery}) => {
 
     const [currentText, setCurrentText] = useState('');
-
 
     const getQuery = (e) => {
         setCurrentText(e.target.value);

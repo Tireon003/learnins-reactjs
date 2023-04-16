@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { InputQuery, NewPostData, ClearInput } from './context.js';
+import React, { useEffect, useState } from 'react';
+import { InputQuery, NewPostData } from './context.js';
+import axios from 'axios';
 
 import './App.css';
 
@@ -7,31 +8,31 @@ import PostList from './components/UI/PostList/PostList';
 import Panel from './components/UI/Panel/Panel';
 import Modal from './components/UI/Modal/Modal.jsx';
 import CreatePostForm from './components/UI/CreatePostForm/CreatePostForm.jsx';
+import Loader from './components/UI/Loader/Loader.jsx';
+import { useFetching } from './hooks/useFetching.jsx';
 
 function App() {
 
-  const [posts, setPosts] = useState([
-    {key: 1, title: 'Первый пост', content: "Это первый пост на странице."},
-    {key: 2, title: 'Второй пост', content: "А это второй пост на странице."},
-    {key: 3, title: 'Третий пост', content: "Надо же, это же уже третий пост на сайте."},
-    {key: 4, title: 'Четвертый пост', content: "Четверный пост на подходе."},
-    {key: 5, title: 'Пятый пост', content: "Пятый пост уже здесь."},
-    {key: 6, title: 'Шестой пост', content: "Не прошло и ста лет, как на сайте появился шестой пост."}
-  ]);
+  const [posts, setPosts] = useState([]);
 
   //to keep query from search in context InputQuery
   const [query, setQuery] = useState('');
 
   const [showModal, setShowModal] = useState(false);
 
-  const [newPostData, setNewPostData] = useState({key: Date.now(), title: '', content: ''});
+  const [newPostData, setNewPostData] = useState({key: Date.now(), title: '', body: ''});
+  const [loadPosts, isPostsLoading, postError] = useFetching(async () => {
+    const response = await axios.get('https://jsonplaceholder.typicode.com/posts')
+    setPosts(response.data);
+  })
+  
+  useEffect(() => {
+    loadPosts()
+  }, []);
 
-  const [clearInput, setClearInput] = useState(false);
-
-  const createPost = () => {
-    if(newPostData.title && newPostData.content) {
+const createPost = () => {
+    if(newPostData.title && newPostData.body) {
       setPosts([newPostData, ...posts]);
-
       setShowModal(false); 
     }
   }
@@ -40,13 +41,14 @@ function App() {
     <InputQuery.Provider value={[query, setQuery]}>
       <NewPostData.Provider value={[newPostData, setNewPostData]}>
           <div className="App">
-            <ClearInput.Provider value={[clearInput, setClearInput]}>
-              <Modal visible={showModal} setVisible={setShowModal}>
+            <Modal visible={showModal} setVisible={setShowModal}>
                 <CreatePostForm createPost={createPost}/>
-              </Modal>
-            </ClearInput.Provider>
+            </Modal>
             <Panel posts={posts} setVisible={setShowModal}/>
-            <PostList posts={posts}/>
+            {postError && <h1 style={{textAlign: "center", marginTop: 20}}>Произошла ошибка... {postError}</h1>}
+            {isPostsLoading
+              ? <div style={{display: "flex", justifyContent: "center", marginTop: 60}}><Loader/></div>
+              : <PostList posts={posts}/>}
           </div>
       </NewPostData.Provider>
     </InputQuery.Provider>
