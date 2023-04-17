@@ -10,6 +10,7 @@ import Modal from './components/UI/Modal/Modal.jsx';
 import CreatePostForm from './components/UI/CreatePostForm/CreatePostForm.jsx';
 import Loader from './components/UI/Loader/Loader.jsx';
 import { useFetching } from './hooks/useFetching.jsx';
+import Header from './components/Header/Header.jsx';
 
 function App() {
 
@@ -41,15 +42,19 @@ const createPost = () => {
     <InputQuery.Provider value={[query, setQuery]}>
       <NewPostData.Provider value={[newPostData, setNewPostData]}>
           <div className="App">
-            <Modal visible={showModal} setVisible={setShowModal}>
+            <Header/>
+            <div className='page_body'>
+              <Modal visible={showModal} setVisible={setShowModal}>
                 <CreatePostForm createPost={createPost}/>
-            </Modal>
-            <Panel posts={posts} setVisible={setShowModal}/>
-            {postError && <h1 style={{textAlign: "center", marginTop: 20}}>Произошла ошибка... {postError}</h1>}
-            {isPostsLoading
-              ? <div style={{display: "flex", justifyContent: "center", marginTop: 60}}><Loader/></div>
-              : <PostList posts={posts}/>}
+              </Modal>
+              <Panel posts={posts} setVisible={setShowModal}/>
+              {postError && <h1 style={{textAlign: "center", marginTop: 20}}>Произошла ошибка... {postError}</h1>}
+              {isPostsLoading
+                ? <div style={{display: "flex", justifyContent: "center", marginTop: 60}}><Loader/></div>
+                : <PostList posts={posts}/>}
+            </div>
           </div>
+            
       </NewPostData.Provider>
     </InputQuery.Provider>
   );

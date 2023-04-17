@@ -1,0 +1,57 @@
+.header {
+    height: 68px;
+    width: 100%;
+    background: rgb(38, 38, 44);
+    position: fixed;
+    box-shadow: 0 1px 10px black;
+    display: flex;
+    align-items: center;
+  }
+
+  .header_body {
+    margin: 0 60px;
+    min-width: 480px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo_ring {
+    border: 3px dashed white;
+    border-radius: 40%;
+    width: 40px;
+    height: 40px;
+    animation: logo_rotation 8s infinite linear;
+  }
+  
+  .header_logo {
+    display: flex;
+    align-items: center;
+    
+  }
+  
+  @keyframes logo_rotation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .logo_label {
+    padding-left: 10px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+
+
+  .header_navbar span {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 10px;
+  }
