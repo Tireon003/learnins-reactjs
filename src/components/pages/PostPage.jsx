@@ -37,10 +37,9 @@ const createPost = () => {
   }
     
     return (
-        <InputQuery.Provider value={[query, setQuery]}>
-      <NewPostData.Provider value={[newPostData, setNewPostData]}>
+      <InputQuery.Provider value={[query, setQuery]}>
+        <NewPostData.Provider value={[newPostData, setNewPostData]}>
           <div className="App">
-            <Header/>
             <div className='page_body'>
               <Modal visible={showModal} setVisible={setShowModal}>
                 <CreatePostForm createPost={createPost}/>
@@ -51,10 +50,9 @@ const createPost = () => {
                 ? <div style={{display: "flex", justifyContent: "center", marginTop: 60}}><Loader/></div>
                 : <PostList posts={posts}/>}
             </div>
-          </div>
-            
-      </NewPostData.Provider>
-    </InputQuery.Provider>
+          </div> 
+        </NewPostData.Provider>
+      </InputQuery.Provider>
     );
 }
 

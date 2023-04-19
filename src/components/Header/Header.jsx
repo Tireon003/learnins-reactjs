@@ -1,5 +1,7 @@
 import cl from './Header.module.css';
 
+import {Link} from 'react-router-dom';
+
 const Header = () => {
     return (
         <header className={cl.header}>
@@ -9,9 +11,9 @@ const Header = () => {
                     <h1 className={cl.logo_label}>PROJECT</h1>
                 </div>
                 <nav className={cl.header_navbar}>
-                    <span>ГЛАВНАЯ</span>
-                    <span>ПОСТЫ</span>
-                    <span>ИНФОРМАЦИЯ</span>
+                    <Link to='/home'>Главная</Link>
+                    <Link to='/posts'>Посты</Link>
+                    <Link to='/info'>Информация</Link>
                 </nav>
             </div>
         </header>

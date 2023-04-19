@@ -47,11 +47,17 @@
 
 
 
-  .header_navbar span {
+  .header_navbar a {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: white;
     cursor: pointer;
     font-size: 18px;
     font-weight: bold;
-    margin-left: 10px;
+    text-decoration: none;
+  }
+
+  .header_navbar {
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
   }

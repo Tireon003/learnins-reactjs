@@ -1,24 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import { InputQuery, NewPostData } from './context.js';
-import axios from 'axios';
+import React from 'react';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 
 import './App.css';
 
-import PostList from './components/UI/PostList/PostList';
-import Panel from './components/UI/Panel/Panel';
-import Modal from './components/UI/Modal/Modal.jsx';
-import CreatePostForm from './components/UI/CreatePostForm/CreatePostForm.jsx';
-import Loader from './components/UI/Loader/Loader.jsx';
-import { useFetching } from './hooks/useFetching.jsx';
 import Header from './components/Header/Header.jsx';
-import PostPage from './components/pages/PostPage.jsx';
+import HomePage from './components/pages/HomePage.jsx';
+import PostPage from './components/pages/PostPage';
+import InfoPage from './components/pages/InfoPage';
+import ErrPage from './components/pages/ErrPage';
+
 
 function App() {
 
-  
-
   return (
-    <PostPage/>
+    <BrowserRouter>
+      <Header/>
+      <Routes>
+
+        <Route path='/home' element={<HomePage/>}/>
+        <Route path='/posts' element={<PostPage/>}/>
+        <Route path='/info' element={<InfoPage/>}/>
+        <Route path='/error' element={<ErrPage/>}/>
+        <Route path='*' element={<Navigate to='/error'/>}/>
+
+      </Routes>
+      
+    </BrowserRouter>
+    
   );
 }
 
