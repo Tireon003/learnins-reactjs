@@ -8,18 +8,16 @@ import Modal from '../UI/Modal/Modal.jsx';
 import CreatePostForm from '../UI/CreatePostForm/CreatePostForm';
 import Loader from '../UI/Loader/Loader.jsx';
 import { useFetching } from '../../hooks/useFetching.jsx';
-import Header from '../Header/Header.jsx';
 
 const PostPage = () => {
     
     const [posts, setPosts] = useState([]);
 
-  //to keep query from search in context InputQuery
   const [query, setQuery] = useState('');
 
   const [showModal, setShowModal] = useState(false);
 
-  const [newPostData, setNewPostData] = useState({key: Date.now(), title: '', body: ''});
+  const [newPostData, setNewPostData] = useState({key: Date.now(), title: '', body: '', id: Date.now()});
   const [loadPosts, isPostsLoading, postError] = useFetching(async () => {
     const response = await axios.get('https://jsonplaceholder.typicode.com/posts')
     setPosts(response.data);
